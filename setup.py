@@ -9,7 +9,7 @@ if sys.platform.startswith("darwin"):
     COMPILE_ARGS.append("-mmacosx-version-min=10.7")
 
 setup(
-    name="phonetisaurus",
+    name="py_phonetisaurus",
     ext_modules=cythonize(
         Extension(
             "g2p",
