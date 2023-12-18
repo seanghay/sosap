@@ -1,4 +1,4 @@
-## 🗣️ sosap / សូរសព្ទ
+<img width=144 src="https://github.com/seanghay/sosap/assets/15277233/25c2ae30-4dd6-4350-a387-c30353cb2a98">
 
 Python binding for [Phonetisaurus](https://github.com/AdolfVonKleist/Phonetisaurus) using Cython.
 
