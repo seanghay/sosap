@@ -8,7 +8,7 @@ if sys.platform.startswith("darwin"):
     COMPILE_ARGS.append("-mmacosx-version-min=10.7")
     
 phonetisaurus_extension = Extension(
-    name="sosap.core",
+    name="sosap",
     sources=[
         "src/openfst/lib/compat.cc",
         "src/openfst/lib/flags.cc",
