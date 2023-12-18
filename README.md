@@ -1,6 +1,6 @@
 ## 🗣️ sosap / សូរសព្ទ
 
-Python binding for Phonetisaurus
+Python binding for [Phonetisaurus](https://github.com/AdolfVonKleist/Phonetisaurus) using Cython.
 
 ### Install
 
@@ -18,11 +18,12 @@ pip install git+https://github.com/seanghay/sosap.git
 from sosap import Model
 
 model = Model("g2p.fst")
-
 model.phoneticize("hello")
 ```
 
+---
 
 ### License
 
-MIT
+`MIT`
+
