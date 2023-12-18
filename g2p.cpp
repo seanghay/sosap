@@ -13,25 +13,25 @@
             "-mmacosx-version-min=10.7"
         ],
         "include_dirs": [
-            "openfst/src/include",
-            "Phonetisaurus/src",
-            "Phonetisaurus/src/3rdparty/utfcpp"
+            "openfst/include",
+            "Phonetisaurus",
+            "Phonetisaurus/3rdparty/utfcpp"
         ],
         "language": "c++",
         "name": "g2p",
         "sources": [
             "g2p.pyx",
-            "openfst/src/lib/compat.cc",
-            "openfst/src/lib/flags.cc",
-            "openfst/src/lib/fst-types.cc",
-            "openfst/src/lib/fst.cc",
-            "openfst/src/lib/mapped-file.cc",
-            "openfst/src/lib/properties.cc",
-            "openfst/src/lib/symbol-table-ops.cc",
-            "openfst/src/lib/symbol-table.cc",
-            "openfst/src/lib/util.cc",
-            "openfst/src/lib/weight.cc",
-            "Phonetisaurus/src/lib/util.cc"
+            "openfst/lib/compat.cc",
+            "openfst/lib/flags.cc",
+            "openfst/lib/fst-types.cc",
+            "openfst/lib/fst.cc",
+            "openfst/lib/mapped-file.cc",
+            "openfst/lib/properties.cc",
+            "openfst/lib/symbol-table-ops.cc",
+            "openfst/lib/symbol-table.cc",
+            "openfst/lib/util.cc",
+            "openfst/lib/weight.cc",
+            "Phonetisaurus/lib/util.cc"
         ]
     },
     "module_name": "g2p"
