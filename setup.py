@@ -1,5 +1,4 @@
 from setuptools import setup, Extension
-from Cython.Build import cythonize
 import sys
 
 COMPILE_ARGS = ["-std=c++11", "-w"]
@@ -7,33 +6,30 @@ COMPILE_ARGS = ["-std=c++11", "-w"]
 if sys.platform.startswith("darwin"):
     COMPILE_ARGS.append("-stdlib=libc++")
     COMPILE_ARGS.append("-mmacosx-version-min=10.7")
-
-setup(
-    name="py_phonetisaurus",
-    ext_modules=cythonize(
-        Extension(
-            "g2p",
-            [
-                "openfst/lib/compat.cc",
-                "openfst/lib/flags.cc",
-                "openfst/lib/fst-types.cc",
-                "openfst/lib/fst.cc",
-                "openfst/lib/mapped-file.cc",
-                "openfst/lib/properties.cc",
-                "openfst/lib/symbol-table-ops.cc",
-                "openfst/lib/symbol-table.cc",
-                "openfst/lib/util.cc",
-                "openfst/lib/weight.cc",
-                "Phonetisaurus/lib/util.cc",
-                "g2p.pyx",
-            ],
-            language="c++",
-            include_dirs=[
-                "openfst/include",
-                "Phonetisaurus",
-                "Phonetisaurus/3rdparty/utfcpp",
-            ],
-            extra_compile_args=COMPILE_ARGS,
-        )
-    ),
+    
+phonetisaurus_extension = Extension(
+    name="_phonetisaurus",
+    sources=[
+        "src/openfst/lib/compat.cc",
+        "src/openfst/lib/flags.cc",
+        "src/openfst/lib/fst-types.cc",
+        "src/openfst/lib/fst.cc",
+        "src/openfst/lib/mapped-file.cc",
+        "src/openfst/lib/properties.cc",
+        "src/openfst/lib/symbol-table-ops.cc",
+        "src/openfst/lib/symbol-table.cc",
+        "src/openfst/lib/util.cc",
+        "src/openfst/lib/weight.cc",
+        "src/Phonetisaurus/lib/util.cc",
+        "src/core.pyx",
+    ],
+    language="c++",
+    include_dirs=[
+        "src/openfst/include",
+        "src/Phonetisaurus",
+        "src/Phonetisaurus/3rdparty/utfcpp",
+    ],
+    extra_compile_args=COMPILE_ARGS,
 )
+
+setup(ext_modules=[phonetisaurus_extension])

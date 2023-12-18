@@ -4,7 +4,7 @@
 {
     "distutils": {
         "depends": [
-            "binding.cc"
+            "src/phonemizer.cc"
         ],
         "extra_compile_args": [
             "-std=c++11",
@@ -13,28 +13,29 @@
             "-mmacosx-version-min=10.7"
         ],
         "include_dirs": [
-            "openfst/include",
-            "Phonetisaurus",
-            "Phonetisaurus/3rdparty/utfcpp"
+            "src",
+            "src/openfst/include",
+            "src/Phonetisaurus",
+            "src/Phonetisaurus/3rdparty/utfcpp"
         ],
         "language": "c++",
-        "name": "g2p",
+        "name": "_phonetisaurus",
         "sources": [
-            "g2p.pyx",
-            "openfst/lib/compat.cc",
-            "openfst/lib/flags.cc",
-            "openfst/lib/fst-types.cc",
-            "openfst/lib/fst.cc",
-            "openfst/lib/mapped-file.cc",
-            "openfst/lib/properties.cc",
-            "openfst/lib/symbol-table-ops.cc",
-            "openfst/lib/symbol-table.cc",
-            "openfst/lib/util.cc",
-            "openfst/lib/weight.cc",
-            "Phonetisaurus/lib/util.cc"
+            "src/core.pyx",
+            "src/openfst/lib/compat.cc",
+            "src/openfst/lib/flags.cc",
+            "src/openfst/lib/fst-types.cc",
+            "src/openfst/lib/fst.cc",
+            "src/openfst/lib/mapped-file.cc",
+            "src/openfst/lib/properties.cc",
+            "src/openfst/lib/symbol-table-ops.cc",
+            "src/openfst/lib/symbol-table.cc",
+            "src/openfst/lib/util.cc",
+            "src/openfst/lib/weight.cc",
+            "src/Phonetisaurus/lib/util.cc"
         ]
     },
-    "module_name": "g2p"
+    "module_name": "_phonetisaurus"
 }
 END: Cython Metadata */
 
@@ -1231,8 +1232,8 @@ static CYTHON_INLINE float __PYX_NAN() {
     #define __PYX_EXTERN_C extern "C++"
 #endif
 
-#define __PYX_HAVE__g2p
-#define __PYX_HAVE_API__g2p
+#define __PYX_HAVE___phonetisaurus
+#define __PYX_HAVE_API___phonetisaurus
 /* Early includes */
 #include "ios"
 #include "new"
@@ -1241,7 +1242,7 @@ static CYTHON_INLINE float __PYX_NAN() {
 #include <vector>
 #include <string.h>
 #include <string>
-#include "binding.cc"
+#include "phonemizer.cc"
 #ifdef _OPENMP
 #include <omp.h>
 #endif /* _OPENMP */
@@ -1508,7 +1509,7 @@ static const char *__pyx_filename;
 
 static const char *__pyx_f[] = {
   "<stringsource>",
-  "g2p.pyx",
+  "src/core.pyx",
 };
 /* #### Code section: utility_code_proto_before_types ### */
 /* ForceInitThreads.proto */
@@ -1521,16 +1522,16 @@ static const char *__pyx_f[] = {
 /* #### Code section: type_declarations ### */
 
 /*--- Type declarations ---*/
-struct __pyx_obj_3g2p_Model;
+struct __pyx_obj_14_phonetisaurus_Model;
 
-/* "g2p.pyx":10
+/* "src/core.pyx":10
  *     vector[string] phoneticize(string&)
  * 
  * cdef class Model:             # <<<<<<<<<<<<<<
  *   cdef Phonemizer* phonemizer
  * 
  */
-struct __pyx_obj_3g2p_Model {
+struct __pyx_obj_14_phonetisaurus_Model {
   PyObject_HEAD
   Phonemizer *phonemizer;
 };
@@ -2223,7 +2224,7 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 /* Module declarations from "libcpp.string" */
 
-/* Module declarations from "g2p" */
+/* Module declarations from "_phonetisaurus" */
 static std::string __pyx_convert_string_from_py_std__in_string(PyObject *); /*proto*/
 static CYTHON_INLINE PyObject *__pyx_convert_PyObject_string_to_py_std__in_string(std::string const &); /*proto*/
 static CYTHON_INLINE PyObject *__pyx_convert_PyUnicode_string_to_py_std__in_string(std::string const &); /*proto*/
@@ -2232,18 +2233,17 @@ static CYTHON_INLINE PyObject *__pyx_convert_PyBytes_string_to_py_std__in_string
 static CYTHON_INLINE PyObject *__pyx_convert_PyByteArray_string_to_py_std__in_string(std::string const &); /*proto*/
 /* #### Code section: typeinfo ### */
 /* #### Code section: before_global_var ### */
-#define __Pyx_MODULE_NAME "g2p"
-extern int __pyx_module_is_main_g2p;
-int __pyx_module_is_main_g2p = 0;
+#define __Pyx_MODULE_NAME "_phonetisaurus"
+extern int __pyx_module_is_main__phonetisaurus;
+int __pyx_module_is_main__phonetisaurus = 0;
 
-/* Implementation of "g2p" */
+/* Implementation of "_phonetisaurus" */
 /* #### Code section: global_var ### */
 static PyObject *__pyx_builtin_TypeError;
 /* #### Code section: string_decls ### */
 static const char __pyx_k_c[] = "c";
 static const char __pyx_k__7[] = "?";
 static const char __pyx_k_gc[] = "gc";
-static const char __pyx_k_g2p[] = "g2p";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_self[] = "self";
@@ -2254,7 +2254,6 @@ static const char __pyx_k_enable[] = "enable";
 static const char __pyx_k_reduce[] = "__reduce__";
 static const char __pyx_k_c_value[] = "c_value";
 static const char __pyx_k_disable[] = "disable";
-static const char __pyx_k_g2p_pyx[] = "g2p.pyx";
 static const char __pyx_k_getstate[] = "__getstate__";
 static const char __pyx_k_setstate[] = "__setstate__";
 static const char __pyx_k_TypeError[] = "TypeError";
@@ -2264,7 +2263,9 @@ static const char __pyx_k_pyx_state[] = "__pyx_state";
 static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
 static const char __pyx_k_phoneticize[] = "phoneticize";
 static const char __pyx_k_is_coroutine[] = "_is_coroutine";
+static const char __pyx_k_src_core_pyx[] = "src/core.pyx";
 static const char __pyx_k_stringsource[] = "<stringsource>";
+static const char __pyx_k_phonetisaurus[] = "_phonetisaurus";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_Model_phoneticize[] = "Model.phoneticize";
@@ -2274,11 +2275,12 @@ static const char __pyx_k_Model___reduce_cython[] = "Model.__reduce_cython__";
 static const char __pyx_k_Model___setstate_cython[] = "Model.__setstate_cython__";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
 /* #### Code section: decls ### */
-static int __pyx_pf_3g2p_5Model___cinit__(struct __pyx_obj_3g2p_Model *__pyx_v_self, PyObject *__pyx_v_modelfile); /* proto */
-static PyObject *__pyx_pf_3g2p_5Model_2phoneticize(struct __pyx_obj_3g2p_Model *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
-static PyObject *__pyx_pf_3g2p_5Model_4__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_3g2p_Model *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_3g2p_5Model_6__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_3g2p_Model *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
-static PyObject *__pyx_tp_new_3g2p_Model(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static int __pyx_pf_14_phonetisaurus_5Model___cinit__(struct __pyx_obj_14_phonetisaurus_Model *__pyx_v_self, PyObject *__pyx_v_modelfile); /* proto */
+static PyObject *__pyx_pf_14_phonetisaurus_5Model_2phoneticize(struct __pyx_obj_14_phonetisaurus_Model *__pyx_v_self, PyObject *__pyx_v_value); /* proto */
+static void __pyx_pf_14_phonetisaurus_5Model_4__dealloc__(struct __pyx_obj_14_phonetisaurus_Model *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_14_phonetisaurus_5Model_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_14_phonetisaurus_Model *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_14_phonetisaurus_5Model_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_14_phonetisaurus_Model *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_tp_new_14_phonetisaurus_Model(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 /* #### Code section: late_includes ### */
 /* #### Code section: module_state ### */
 typedef struct {
@@ -2313,9 +2315,9 @@ typedef struct {
   #if CYTHON_USE_MODULE_STATE
   #endif
   #if CYTHON_USE_MODULE_STATE
-  PyObject *__pyx_type_3g2p_Model;
+  PyObject *__pyx_type_14_phonetisaurus_Model;
   #endif
-  PyTypeObject *__pyx_ptype_3g2p_Model;
+  PyTypeObject *__pyx_ptype_14_phonetisaurus_Model;
   PyObject *__pyx_n_s_Model;
   PyObject *__pyx_n_s_Model___reduce_cython;
   PyObject *__pyx_n_s_Model___setstate_cython;
@@ -2328,8 +2330,6 @@ typedef struct {
   PyObject *__pyx_n_s_cline_in_traceback;
   PyObject *__pyx_kp_u_disable;
   PyObject *__pyx_kp_u_enable;
-  PyObject *__pyx_n_s_g2p;
-  PyObject *__pyx_kp_s_g2p_pyx;
   PyObject *__pyx_kp_u_gc;
   PyObject *__pyx_n_s_getstate;
   PyObject *__pyx_n_s_is_coroutine;
@@ -2339,6 +2339,7 @@ typedef struct {
   PyObject *__pyx_n_s_name;
   PyObject *__pyx_kp_s_no_default___reduce___due_to_non;
   PyObject *__pyx_n_s_phoneticize;
+  PyObject *__pyx_n_s_phonetisaurus;
   PyObject *__pyx_n_s_pyx_state;
   PyObject *__pyx_n_s_reduce;
   PyObject *__pyx_n_s_reduce_cython;
@@ -2346,6 +2347,7 @@ typedef struct {
   PyObject *__pyx_n_s_self;
   PyObject *__pyx_n_s_setstate;
   PyObject *__pyx_n_s_setstate_cython;
+  PyObject *__pyx_kp_s_src_core_pyx;
   PyObject *__pyx_kp_s_stringsource;
   PyObject *__pyx_n_s_test;
   PyObject *__pyx_n_s_value;
@@ -2397,8 +2399,8 @@ static int __pyx_m_clear(PyObject *m) {
   #ifdef __Pyx_FusedFunction_USED
   Py_CLEAR(clear_module_state->__pyx_FusedFunctionType);
   #endif
-  Py_CLEAR(clear_module_state->__pyx_ptype_3g2p_Model);
-  Py_CLEAR(clear_module_state->__pyx_type_3g2p_Model);
+  Py_CLEAR(clear_module_state->__pyx_ptype_14_phonetisaurus_Model);
+  Py_CLEAR(clear_module_state->__pyx_type_14_phonetisaurus_Model);
   Py_CLEAR(clear_module_state->__pyx_n_s_Model);
   Py_CLEAR(clear_module_state->__pyx_n_s_Model___reduce_cython);
   Py_CLEAR(clear_module_state->__pyx_n_s_Model___setstate_cython);
@@ -2411,8 +2413,6 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_cline_in_traceback);
   Py_CLEAR(clear_module_state->__pyx_kp_u_disable);
   Py_CLEAR(clear_module_state->__pyx_kp_u_enable);
-  Py_CLEAR(clear_module_state->__pyx_n_s_g2p);
-  Py_CLEAR(clear_module_state->__pyx_kp_s_g2p_pyx);
   Py_CLEAR(clear_module_state->__pyx_kp_u_gc);
   Py_CLEAR(clear_module_state->__pyx_n_s_getstate);
   Py_CLEAR(clear_module_state->__pyx_n_s_is_coroutine);
@@ -2422,6 +2422,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_name);
   Py_CLEAR(clear_module_state->__pyx_kp_s_no_default___reduce___due_to_non);
   Py_CLEAR(clear_module_state->__pyx_n_s_phoneticize);
+  Py_CLEAR(clear_module_state->__pyx_n_s_phonetisaurus);
   Py_CLEAR(clear_module_state->__pyx_n_s_pyx_state);
   Py_CLEAR(clear_module_state->__pyx_n_s_reduce);
   Py_CLEAR(clear_module_state->__pyx_n_s_reduce_cython);
@@ -2429,6 +2430,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_self);
   Py_CLEAR(clear_module_state->__pyx_n_s_setstate);
   Py_CLEAR(clear_module_state->__pyx_n_s_setstate_cython);
+  Py_CLEAR(clear_module_state->__pyx_kp_s_src_core_pyx);
   Py_CLEAR(clear_module_state->__pyx_kp_s_stringsource);
   Py_CLEAR(clear_module_state->__pyx_n_s_test);
   Py_CLEAR(clear_module_state->__pyx_n_s_value);
@@ -2458,8 +2460,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   #ifdef __Pyx_FusedFunction_USED
   Py_VISIT(traverse_module_state->__pyx_FusedFunctionType);
   #endif
-  Py_VISIT(traverse_module_state->__pyx_ptype_3g2p_Model);
-  Py_VISIT(traverse_module_state->__pyx_type_3g2p_Model);
+  Py_VISIT(traverse_module_state->__pyx_ptype_14_phonetisaurus_Model);
+  Py_VISIT(traverse_module_state->__pyx_type_14_phonetisaurus_Model);
   Py_VISIT(traverse_module_state->__pyx_n_s_Model);
   Py_VISIT(traverse_module_state->__pyx_n_s_Model___reduce_cython);
   Py_VISIT(traverse_module_state->__pyx_n_s_Model___setstate_cython);
@@ -2472,8 +2474,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_cline_in_traceback);
   Py_VISIT(traverse_module_state->__pyx_kp_u_disable);
   Py_VISIT(traverse_module_state->__pyx_kp_u_enable);
-  Py_VISIT(traverse_module_state->__pyx_n_s_g2p);
-  Py_VISIT(traverse_module_state->__pyx_kp_s_g2p_pyx);
   Py_VISIT(traverse_module_state->__pyx_kp_u_gc);
   Py_VISIT(traverse_module_state->__pyx_n_s_getstate);
   Py_VISIT(traverse_module_state->__pyx_n_s_is_coroutine);
@@ -2483,6 +2483,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_name);
   Py_VISIT(traverse_module_state->__pyx_kp_s_no_default___reduce___due_to_non);
   Py_VISIT(traverse_module_state->__pyx_n_s_phoneticize);
+  Py_VISIT(traverse_module_state->__pyx_n_s_phonetisaurus);
   Py_VISIT(traverse_module_state->__pyx_n_s_pyx_state);
   Py_VISIT(traverse_module_state->__pyx_n_s_reduce);
   Py_VISIT(traverse_module_state->__pyx_n_s_reduce_cython);
@@ -2490,6 +2491,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_self);
   Py_VISIT(traverse_module_state->__pyx_n_s_setstate);
   Py_VISIT(traverse_module_state->__pyx_n_s_setstate_cython);
+  Py_VISIT(traverse_module_state->__pyx_kp_s_src_core_pyx);
   Py_VISIT(traverse_module_state->__pyx_kp_s_stringsource);
   Py_VISIT(traverse_module_state->__pyx_n_s_test);
   Py_VISIT(traverse_module_state->__pyx_n_s_value);
@@ -2534,9 +2536,9 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #if CYTHON_USE_MODULE_STATE
 #endif
 #if CYTHON_USE_MODULE_STATE
-#define __pyx_type_3g2p_Model __pyx_mstate_global->__pyx_type_3g2p_Model
+#define __pyx_type_14_phonetisaurus_Model __pyx_mstate_global->__pyx_type_14_phonetisaurus_Model
 #endif
-#define __pyx_ptype_3g2p_Model __pyx_mstate_global->__pyx_ptype_3g2p_Model
+#define __pyx_ptype_14_phonetisaurus_Model __pyx_mstate_global->__pyx_ptype_14_phonetisaurus_Model
 #define __pyx_n_s_Model __pyx_mstate_global->__pyx_n_s_Model
 #define __pyx_n_s_Model___reduce_cython __pyx_mstate_global->__pyx_n_s_Model___reduce_cython
 #define __pyx_n_s_Model___setstate_cython __pyx_mstate_global->__pyx_n_s_Model___setstate_cython
@@ -2549,8 +2551,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_cline_in_traceback __pyx_mstate_global->__pyx_n_s_cline_in_traceback
 #define __pyx_kp_u_disable __pyx_mstate_global->__pyx_kp_u_disable
 #define __pyx_kp_u_enable __pyx_mstate_global->__pyx_kp_u_enable
-#define __pyx_n_s_g2p __pyx_mstate_global->__pyx_n_s_g2p
-#define __pyx_kp_s_g2p_pyx __pyx_mstate_global->__pyx_kp_s_g2p_pyx
 #define __pyx_kp_u_gc __pyx_mstate_global->__pyx_kp_u_gc
 #define __pyx_n_s_getstate __pyx_mstate_global->__pyx_n_s_getstate
 #define __pyx_n_s_is_coroutine __pyx_mstate_global->__pyx_n_s_is_coroutine
@@ -2560,6 +2560,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_name __pyx_mstate_global->__pyx_n_s_name
 #define __pyx_kp_s_no_default___reduce___due_to_non __pyx_mstate_global->__pyx_kp_s_no_default___reduce___due_to_non
 #define __pyx_n_s_phoneticize __pyx_mstate_global->__pyx_n_s_phoneticize
+#define __pyx_n_s_phonetisaurus __pyx_mstate_global->__pyx_n_s_phonetisaurus
 #define __pyx_n_s_pyx_state __pyx_mstate_global->__pyx_n_s_pyx_state
 #define __pyx_n_s_reduce __pyx_mstate_global->__pyx_n_s_reduce
 #define __pyx_n_s_reduce_cython __pyx_mstate_global->__pyx_n_s_reduce_cython
@@ -2567,6 +2568,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_self __pyx_mstate_global->__pyx_n_s_self
 #define __pyx_n_s_setstate __pyx_mstate_global->__pyx_n_s_setstate
 #define __pyx_n_s_setstate_cython __pyx_mstate_global->__pyx_n_s_setstate_cython
+#define __pyx_kp_s_src_core_pyx __pyx_mstate_global->__pyx_kp_s_src_core_pyx
 #define __pyx_kp_s_stringsource __pyx_mstate_global->__pyx_kp_s_stringsource
 #define __pyx_n_s_test __pyx_mstate_global->__pyx_n_s_test
 #define __pyx_n_s_value __pyx_mstate_global->__pyx_n_s_value
@@ -2896,7 +2898,7 @@ static CYTHON_INLINE PyObject *__pyx_convert_PyByteArray_string_to_py_std__in_st
   return __pyx_r;
 }
 
-/* "g2p.pyx":13
+/* "src/core.pyx":13
  *   cdef Phonemizer* phonemizer
  * 
  *   def __cinit__(self, str modelfile):             # <<<<<<<<<<<<<<
@@ -2905,8 +2907,8 @@ static CYTHON_INLINE PyObject *__pyx_convert_PyByteArray_string_to_py_std__in_st
  */
 
 /* Python wrapper */
-static int __pyx_pw_3g2p_5Model_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static int __pyx_pw_3g2p_5Model_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static int __pyx_pw_14_phonetisaurus_5Model_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_14_phonetisaurus_5Model_1__cinit__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_modelfile = 0;
   CYTHON_UNUSED Py_ssize_t __pyx_nargs;
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
@@ -2966,12 +2968,12 @@ static int __pyx_pw_3g2p_5Model_1__cinit__(PyObject *__pyx_v_self, PyObject *__p
       __Pyx_Arg_XDECREF_VARARGS(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("g2p.Model.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("_phonetisaurus.Model.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_modelfile), (&PyUnicode_Type), 1, "modelfile", 1))) __PYX_ERR(1, 13, __pyx_L1_error)
-  __pyx_r = __pyx_pf_3g2p_5Model___cinit__(((struct __pyx_obj_3g2p_Model *)__pyx_v_self), __pyx_v_modelfile);
+  __pyx_r = __pyx_pf_14_phonetisaurus_5Model___cinit__(((struct __pyx_obj_14_phonetisaurus_Model *)__pyx_v_self), __pyx_v_modelfile);
 
   /* function exit code */
   goto __pyx_L0;
@@ -2988,7 +2990,7 @@ static int __pyx_pw_3g2p_5Model_1__cinit__(PyObject *__pyx_v_self, PyObject *__p
   return __pyx_r;
 }
 
-static int __pyx_pf_3g2p_5Model___cinit__(struct __pyx_obj_3g2p_Model *__pyx_v_self, PyObject *__pyx_v_modelfile) {
+static int __pyx_pf_14_phonetisaurus_5Model___cinit__(struct __pyx_obj_14_phonetisaurus_Model *__pyx_v_self, PyObject *__pyx_v_modelfile) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2999,7 +3001,7 @@ static int __pyx_pf_3g2p_5Model___cinit__(struct __pyx_obj_3g2p_Model *__pyx_v_s
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__cinit__", 1);
 
-  /* "g2p.pyx":14
+  /* "src/core.pyx":14
  * 
  *   def __cinit__(self, str modelfile):
  *     self.phonemizer = new Phonemizer(modelfile.encode("utf-8"))             # <<<<<<<<<<<<<<
@@ -3022,7 +3024,7 @@ static int __pyx_pf_3g2p_5Model___cinit__(struct __pyx_obj_3g2p_Model *__pyx_v_s
   }
   __pyx_v_self->phonemizer = __pyx_t_3;
 
-  /* "g2p.pyx":13
+  /* "src/core.pyx":13
  *   cdef Phonemizer* phonemizer
  * 
  *   def __cinit__(self, str modelfile):             # <<<<<<<<<<<<<<
@@ -3035,14 +3037,14 @@ static int __pyx_pf_3g2p_5Model___cinit__(struct __pyx_obj_3g2p_Model *__pyx_v_s
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("g2p.Model.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("_phonetisaurus.Model.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "g2p.pyx":16
+/* "src/core.pyx":16
  *     self.phonemizer = new Phonemizer(modelfile.encode("utf-8"))
  * 
  *   def phoneticize(self, str value):             # <<<<<<<<<<<<<<
@@ -3051,15 +3053,15 @@ static int __pyx_pf_3g2p_5Model___cinit__(struct __pyx_obj_3g2p_Model *__pyx_v_s
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_3g2p_5Model_3phoneticize(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_14_phonetisaurus_5Model_3phoneticize(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_3g2p_5Model_3phoneticize = {"phoneticize", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_3g2p_5Model_3phoneticize, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_3g2p_5Model_3phoneticize(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_14_phonetisaurus_5Model_3phoneticize = {"phoneticize", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_14_phonetisaurus_5Model_3phoneticize, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_14_phonetisaurus_5Model_3phoneticize(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -3129,12 +3131,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("g2p.Model.phoneticize", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("_phonetisaurus.Model.phoneticize", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), (&PyUnicode_Type), 1, "value", 1))) __PYX_ERR(1, 16, __pyx_L1_error)
-  __pyx_r = __pyx_pf_3g2p_5Model_2phoneticize(((struct __pyx_obj_3g2p_Model *)__pyx_v_self), __pyx_v_value);
+  __pyx_r = __pyx_pf_14_phonetisaurus_5Model_2phoneticize(((struct __pyx_obj_14_phonetisaurus_Model *)__pyx_v_self), __pyx_v_value);
 
   /* function exit code */
   goto __pyx_L0;
@@ -3151,7 +3153,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_3g2p_5Model_2phoneticize(struct __pyx_obj_3g2p_Model *__pyx_v_self, PyObject *__pyx_v_value) {
+static PyObject *__pyx_pf_14_phonetisaurus_5Model_2phoneticize(struct __pyx_obj_14_phonetisaurus_Model *__pyx_v_self, PyObject *__pyx_v_value) {
   std::string __pyx_v_c_value;
   std::string __pyx_7genexpr__pyx_v_c;
   PyObject *__pyx_r = NULL;
@@ -3166,7 +3168,7 @@ static PyObject *__pyx_pf_3g2p_5Model_2phoneticize(struct __pyx_obj_3g2p_Model *
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("phoneticize", 1);
 
-  /* "g2p.pyx":17
+  /* "src/core.pyx":17
  * 
  *   def phoneticize(self, str value):
  *     cdef string c_value = value.encode("utf-8")             # <<<<<<<<<<<<<<
@@ -3183,11 +3185,12 @@ static PyObject *__pyx_pf_3g2p_5Model_2phoneticize(struct __pyx_obj_3g2p_Model *
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c_value = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_2);
 
-  /* "g2p.pyx":18
+  /* "src/core.pyx":18
  *   def phoneticize(self, str value):
  *     cdef string c_value = value.encode("utf-8")
  *     return [c.decode("utf-8") for c in self.phonemizer.phoneticize(c_value)]             # <<<<<<<<<<<<<<
  * 
+ *   def __dealloc__(self):
  */
   __Pyx_XDECREF(__pyx_r);
   { /* enter inner scope */
@@ -3210,7 +3213,7 @@ static PyObject *__pyx_pf_3g2p_5Model_2phoneticize(struct __pyx_obj_3g2p_Model *
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "g2p.pyx":16
+  /* "src/core.pyx":16
  *     self.phonemizer = new Phonemizer(modelfile.encode("utf-8"))
  * 
  *   def phoneticize(self, str value):             # <<<<<<<<<<<<<<
@@ -3222,12 +3225,51 @@ static PyObject *__pyx_pf_3g2p_5Model_2phoneticize(struct __pyx_obj_3g2p_Model *
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_AddTraceback("g2p.Model.phoneticize", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("_phonetisaurus.Model.phoneticize", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
+}
+
+/* "src/core.pyx":20
+ *     return [c.decode("utf-8") for c in self.phonemizer.phoneticize(c_value)]
+ * 
+ *   def __dealloc__(self):             # <<<<<<<<<<<<<<
+ *     del self.phonemizer
+ */
+
+/* Python wrapper */
+static void __pyx_pw_14_phonetisaurus_5Model_5__dealloc__(PyObject *__pyx_v_self); /*proto*/
+static void __pyx_pw_14_phonetisaurus_5Model_5__dealloc__(PyObject *__pyx_v_self) {
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__dealloc__ (wrapper)", 0);
+  __pyx_kwvalues = __Pyx_KwValues_VARARGS(__pyx_args, __pyx_nargs);
+  __pyx_pf_14_phonetisaurus_5Model_4__dealloc__(((struct __pyx_obj_14_phonetisaurus_Model *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+}
+
+static void __pyx_pf_14_phonetisaurus_5Model_4__dealloc__(struct __pyx_obj_14_phonetisaurus_Model *__pyx_v_self) {
+
+  /* "src/core.pyx":21
+ * 
+ *   def __dealloc__(self):
+ *     del self.phonemizer             # <<<<<<<<<<<<<<
+ */
+  delete __pyx_v_self->phonemizer;
+
+  /* "src/core.pyx":20
+ *     return [c.decode("utf-8") for c in self.phonemizer.phoneticize(c_value)]
+ * 
+ *   def __dealloc__(self):             # <<<<<<<<<<<<<<
+ *     del self.phonemizer
+ */
+
+  /* function exit code */
 }
 
 /* "(tree fragment)":1
@@ -3237,15 +3279,15 @@ static PyObject *__pyx_pf_3g2p_5Model_2phoneticize(struct __pyx_obj_3g2p_Model *
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_3g2p_5Model_5__reduce_cython__(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_14_phonetisaurus_5Model_7__reduce_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_3g2p_5Model_5__reduce_cython__ = {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_3g2p_5Model_5__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_3g2p_5Model_5__reduce_cython__(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_14_phonetisaurus_5Model_7__reduce_cython__ = {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_14_phonetisaurus_5Model_7__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_14_phonetisaurus_5Model_7__reduce_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -3270,14 +3312,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   if (unlikely(__pyx_nargs > 0)) {
     __Pyx_RaiseArgtupleInvalid("__reduce_cython__", 1, 0, 0, __pyx_nargs); return NULL;}
   if (unlikely(__pyx_kwds) && __Pyx_NumKwargs_FASTCALL(__pyx_kwds) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "__reduce_cython__", 0))) return NULL;
-  __pyx_r = __pyx_pf_3g2p_5Model_4__reduce_cython__(((struct __pyx_obj_3g2p_Model *)__pyx_v_self));
+  __pyx_r = __pyx_pf_14_phonetisaurus_5Model_6__reduce_cython__(((struct __pyx_obj_14_phonetisaurus_Model *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_3g2p_5Model_4__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_3g2p_Model *__pyx_v_self) {
+static PyObject *__pyx_pf_14_phonetisaurus_5Model_6__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_14_phonetisaurus_Model *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_lineno = 0;
@@ -3302,7 +3344,7 @@ static PyObject *__pyx_pf_3g2p_5Model_4__reduce_cython__(CYTHON_UNUSED struct __
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_AddTraceback("g2p.Model.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("_phonetisaurus.Model.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -3317,15 +3359,15 @@ static PyObject *__pyx_pf_3g2p_5Model_4__reduce_cython__(CYTHON_UNUSED struct __
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_3g2p_5Model_7__setstate_cython__(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_14_phonetisaurus_5Model_9__setstate_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_3g2p_5Model_7__setstate_cython__ = {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_3g2p_5Model_7__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_3g2p_5Model_7__setstate_cython__(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_14_phonetisaurus_5Model_9__setstate_cython__ = {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_14_phonetisaurus_5Model_9__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_14_phonetisaurus_5Model_9__setstate_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -3395,11 +3437,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("g2p.Model.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("_phonetisaurus.Model.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_3g2p_5Model_6__setstate_cython__(((struct __pyx_obj_3g2p_Model *)__pyx_v_self), __pyx_v___pyx_state);
+  __pyx_r = __pyx_pf_14_phonetisaurus_5Model_8__setstate_cython__(((struct __pyx_obj_14_phonetisaurus_Model *)__pyx_v_self), __pyx_v___pyx_state);
 
   /* function exit code */
   {
@@ -3412,7 +3454,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_3g2p_5Model_6__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_3g2p_Model *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_14_phonetisaurus_5Model_8__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_14_phonetisaurus_Model *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_lineno = 0;
@@ -3437,14 +3479,14 @@ static PyObject *__pyx_pf_3g2p_5Model_6__setstate_cython__(CYTHON_UNUSED struct 
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_AddTraceback("g2p.Model.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("_phonetisaurus.Model.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_tp_new_3g2p_Model(PyTypeObject *t, PyObject *a, PyObject *k) {
+static PyObject *__pyx_tp_new_14_phonetisaurus_Model(PyTypeObject *t, PyObject *a, PyObject *k) {
   PyObject *o;
   #if CYTHON_COMPILING_IN_LIMITED_API
   allocfunc alloc_func = (allocfunc)PyType_GetSlot(t, Py_tp_alloc);
@@ -3457,21 +3499,29 @@ static PyObject *__pyx_tp_new_3g2p_Model(PyTypeObject *t, PyObject *a, PyObject 
   }
   if (unlikely(!o)) return 0;
   #endif
-  if (unlikely(__pyx_pw_3g2p_5Model_1__cinit__(o, a, k) < 0)) goto bad;
+  if (unlikely(__pyx_pw_14_phonetisaurus_5Model_1__cinit__(o, a, k) < 0)) goto bad;
   return o;
   bad:
   Py_DECREF(o); o = 0;
   return NULL;
 }
 
-static void __pyx_tp_dealloc_3g2p_Model(PyObject *o) {
+static void __pyx_tp_dealloc_14_phonetisaurus_Model(PyObject *o) {
   #if CYTHON_USE_TP_FINALIZE
   if (unlikely((PY_VERSION_HEX >= 0x03080000 || __Pyx_PyType_HasFeature(Py_TYPE(o), Py_TPFLAGS_HAVE_FINALIZE)) && __Pyx_PyObject_GetSlot(o, tp_finalize, destructor)) && (!PyType_IS_GC(Py_TYPE(o)) || !__Pyx_PyObject_GC_IsFinalized(o))) {
-    if (__Pyx_PyObject_GetSlot(o, tp_dealloc, destructor) == __pyx_tp_dealloc_3g2p_Model) {
+    if (__Pyx_PyObject_GetSlot(o, tp_dealloc, destructor) == __pyx_tp_dealloc_14_phonetisaurus_Model) {
       if (PyObject_CallFinalizerFromDealloc(o)) return;
     }
   }
   #endif
+  {
+    PyObject *etype, *eval, *etb;
+    PyErr_Fetch(&etype, &eval, &etb);
+    __Pyx_SET_REFCNT(o, Py_REFCNT(o) + 1);
+    __pyx_pw_14_phonetisaurus_5Model_5__dealloc__(o);
+    __Pyx_SET_REFCNT(o, Py_REFCNT(o) - 1);
+    PyErr_Restore(etype, eval, etb);
+  }
   #if CYTHON_USE_TYPE_SLOTS || CYTHON_COMPILING_IN_PYPY
   (*Py_TYPE(o)->tp_free)(o);
   #else
@@ -3482,34 +3532,34 @@ static void __pyx_tp_dealloc_3g2p_Model(PyObject *o) {
   #endif
 }
 
-static PyMethodDef __pyx_methods_3g2p_Model[] = {
-  {"phoneticize", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_3g2p_5Model_3phoneticize, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_3g2p_5Model_5__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_3g2p_5Model_7__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+static PyMethodDef __pyx_methods_14_phonetisaurus_Model[] = {
+  {"phoneticize", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_14_phonetisaurus_5Model_3phoneticize, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_14_phonetisaurus_5Model_7__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_14_phonetisaurus_5Model_9__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
   {0, 0, 0, 0}
 };
 #if CYTHON_USE_TYPE_SPECS
-static PyType_Slot __pyx_type_3g2p_Model_slots[] = {
-  {Py_tp_dealloc, (void *)__pyx_tp_dealloc_3g2p_Model},
-  {Py_tp_methods, (void *)__pyx_methods_3g2p_Model},
-  {Py_tp_new, (void *)__pyx_tp_new_3g2p_Model},
+static PyType_Slot __pyx_type_14_phonetisaurus_Model_slots[] = {
+  {Py_tp_dealloc, (void *)__pyx_tp_dealloc_14_phonetisaurus_Model},
+  {Py_tp_methods, (void *)__pyx_methods_14_phonetisaurus_Model},
+  {Py_tp_new, (void *)__pyx_tp_new_14_phonetisaurus_Model},
   {0, 0},
 };
-static PyType_Spec __pyx_type_3g2p_Model_spec = {
-  "g2p.Model",
-  sizeof(struct __pyx_obj_3g2p_Model),
+static PyType_Spec __pyx_type_14_phonetisaurus_Model_spec = {
+  "_phonetisaurus.Model",
+  sizeof(struct __pyx_obj_14_phonetisaurus_Model),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE,
-  __pyx_type_3g2p_Model_slots,
+  __pyx_type_14_phonetisaurus_Model_slots,
 };
 #else
 
-static PyTypeObject __pyx_type_3g2p_Model = {
+static PyTypeObject __pyx_type_14_phonetisaurus_Model = {
   PyVarObject_HEAD_INIT(0, 0)
-  "g2p.""Model", /*tp_name*/
-  sizeof(struct __pyx_obj_3g2p_Model), /*tp_basicsize*/
+  "_phonetisaurus.""Model", /*tp_name*/
+  sizeof(struct __pyx_obj_14_phonetisaurus_Model), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_3g2p_Model, /*tp_dealloc*/
+  __pyx_tp_dealloc_14_phonetisaurus_Model, /*tp_dealloc*/
   #if PY_VERSION_HEX < 0x030800b4
   0, /*tp_print*/
   #endif
@@ -3542,7 +3592,7 @@ static PyTypeObject __pyx_type_3g2p_Model = {
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
   0, /*tp_iternext*/
-  __pyx_methods_3g2p_Model, /*tp_methods*/
+  __pyx_methods_14_phonetisaurus_Model, /*tp_methods*/
   0, /*tp_members*/
   0, /*tp_getset*/
   0, /*tp_base*/
@@ -3554,7 +3604,7 @@ static PyTypeObject __pyx_type_3g2p_Model = {
   #endif
   0, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_3g2p_Model, /*tp_new*/
+  __pyx_tp_new_14_phonetisaurus_Model, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -3614,8 +3664,6 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
     {&__pyx_kp_u_disable, __pyx_k_disable, sizeof(__pyx_k_disable), 0, 1, 0, 0},
     {&__pyx_kp_u_enable, __pyx_k_enable, sizeof(__pyx_k_enable), 0, 1, 0, 0},
-    {&__pyx_n_s_g2p, __pyx_k_g2p, sizeof(__pyx_k_g2p), 0, 0, 1, 1},
-    {&__pyx_kp_s_g2p_pyx, __pyx_k_g2p_pyx, sizeof(__pyx_k_g2p_pyx), 0, 0, 1, 0},
     {&__pyx_kp_u_gc, __pyx_k_gc, sizeof(__pyx_k_gc), 0, 1, 0, 0},
     {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
     {&__pyx_n_s_is_coroutine, __pyx_k_is_coroutine, sizeof(__pyx_k_is_coroutine), 0, 0, 1, 1},
@@ -3625,6 +3673,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
     {&__pyx_kp_s_no_default___reduce___due_to_non, __pyx_k_no_default___reduce___due_to_non, sizeof(__pyx_k_no_default___reduce___due_to_non), 0, 0, 1, 0},
     {&__pyx_n_s_phoneticize, __pyx_k_phoneticize, sizeof(__pyx_k_phoneticize), 0, 0, 1, 1},
+    {&__pyx_n_s_phonetisaurus, __pyx_k_phonetisaurus, sizeof(__pyx_k_phonetisaurus), 0, 0, 1, 1},
     {&__pyx_n_s_pyx_state, __pyx_k_pyx_state, sizeof(__pyx_k_pyx_state), 0, 0, 1, 1},
     {&__pyx_n_s_reduce, __pyx_k_reduce, sizeof(__pyx_k_reduce), 0, 0, 1, 1},
     {&__pyx_n_s_reduce_cython, __pyx_k_reduce_cython, sizeof(__pyx_k_reduce_cython), 0, 0, 1, 1},
@@ -3632,6 +3681,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_self, __pyx_k_self, sizeof(__pyx_k_self), 0, 0, 1, 1},
     {&__pyx_n_s_setstate, __pyx_k_setstate, sizeof(__pyx_k_setstate), 0, 0, 1, 1},
     {&__pyx_n_s_setstate_cython, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
+    {&__pyx_kp_s_src_core_pyx, __pyx_k_src_core_pyx, sizeof(__pyx_k_src_core_pyx), 0, 0, 1, 0},
     {&__pyx_kp_s_stringsource, __pyx_k_stringsource, sizeof(__pyx_k_stringsource), 0, 0, 1, 0},
     {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
     {&__pyx_n_s_value, __pyx_k_value, sizeof(__pyx_k_value), 0, 0, 1, 1},
@@ -3652,7 +3702,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "g2p.pyx":16
+  /* "src/core.pyx":16
  *     self.phonemizer = new Phonemizer(modelfile.encode("utf-8"))
  * 
  *   def phoneticize(self, str value):             # <<<<<<<<<<<<<<
@@ -3662,7 +3712,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __pyx_tuple_ = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_value, __pyx_n_s_c_value, __pyx_n_s_c); if (unlikely(!__pyx_tuple_)) __PYX_ERR(1, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
-  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple_, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_g2p_pyx, __pyx_n_s_phoneticize, 16, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) __PYX_ERR(1, 16, __pyx_L1_error)
+  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple_, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_core_pyx, __pyx_n_s_phoneticize, 16, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) __PYX_ERR(1, 16, __pyx_L1_error)
 
   /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
@@ -3745,27 +3795,27 @@ static int __Pyx_modinit_type_init_code(void) {
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
   #if CYTHON_USE_TYPE_SPECS
-  __pyx_ptype_3g2p_Model = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_3g2p_Model_spec, NULL); if (unlikely(!__pyx_ptype_3g2p_Model)) __PYX_ERR(1, 10, __pyx_L1_error)
-  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_3g2p_Model_spec, __pyx_ptype_3g2p_Model) < 0) __PYX_ERR(1, 10, __pyx_L1_error)
+  __pyx_ptype_14_phonetisaurus_Model = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_14_phonetisaurus_Model_spec, NULL); if (unlikely(!__pyx_ptype_14_phonetisaurus_Model)) __PYX_ERR(1, 10, __pyx_L1_error)
+  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_14_phonetisaurus_Model_spec, __pyx_ptype_14_phonetisaurus_Model) < 0) __PYX_ERR(1, 10, __pyx_L1_error)
   #else
-  __pyx_ptype_3g2p_Model = &__pyx_type_3g2p_Model;
+  __pyx_ptype_14_phonetisaurus_Model = &__pyx_type_14_phonetisaurus_Model;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
   #endif
   #if !CYTHON_USE_TYPE_SPECS
-  if (__Pyx_PyType_Ready(__pyx_ptype_3g2p_Model) < 0) __PYX_ERR(1, 10, __pyx_L1_error)
+  if (__Pyx_PyType_Ready(__pyx_ptype_14_phonetisaurus_Model) < 0) __PYX_ERR(1, 10, __pyx_L1_error)
   #endif
   #if PY_MAJOR_VERSION < 3
-  __pyx_ptype_3g2p_Model->tp_print = 0;
+  __pyx_ptype_14_phonetisaurus_Model->tp_print = 0;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
-  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_ptype_3g2p_Model->tp_dictoffset && __pyx_ptype_3g2p_Model->tp_getattro == PyObject_GenericGetAttr)) {
-    __pyx_ptype_3g2p_Model->tp_getattro = __Pyx_PyObject_GenericGetAttr;
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_ptype_14_phonetisaurus_Model->tp_dictoffset && __pyx_ptype_14_phonetisaurus_Model->tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_ptype_14_phonetisaurus_Model->tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
   #endif
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Model, (PyObject *) __pyx_ptype_3g2p_Model) < 0) __PYX_ERR(1, 10, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Model, (PyObject *) __pyx_ptype_14_phonetisaurus_Model) < 0) __PYX_ERR(1, 10, __pyx_L1_error)
   #if !CYTHON_COMPILING_IN_LIMITED_API
-  if (__Pyx_setup_reduce((PyObject *) __pyx_ptype_3g2p_Model) < 0) __PYX_ERR(1, 10, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject *) __pyx_ptype_14_phonetisaurus_Model) < 0) __PYX_ERR(1, 10, __pyx_L1_error)
   #endif
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -3802,10 +3852,10 @@ static int __Pyx_modinit_function_import_code(void) {
 #if PY_MAJOR_VERSION >= 3
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 static PyObject* __pyx_pymod_create(PyObject *spec, PyModuleDef *def); /*proto*/
-static int __pyx_pymod_exec_g2p(PyObject* module); /*proto*/
+static int __pyx_pymod_exec__phonetisaurus(PyObject* module); /*proto*/
 static PyModuleDef_Slot __pyx_moduledef_slots[] = {
   {Py_mod_create, (void*)__pyx_pymod_create},
-  {Py_mod_exec, (void*)__pyx_pymod_exec_g2p},
+  {Py_mod_exec, (void*)__pyx_pymod_exec__phonetisaurus},
   {0, NULL}
 };
 #endif
@@ -3818,7 +3868,7 @@ namespace {
   #endif
   {
       PyModuleDef_HEAD_INIT,
-      "g2p",
+      "_phonetisaurus",
       0, /* m_doc */
     #if CYTHON_PEP489_MULTI_PHASE_INIT
       0, /* m_size */
@@ -3866,11 +3916,11 @@ namespace {
 
 
 #if PY_MAJOR_VERSION < 3
-__Pyx_PyMODINIT_FUNC initg2p(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC initg2p(void)
+__Pyx_PyMODINIT_FUNC init_phonetisaurus(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC init_phonetisaurus(void)
 #else
-__Pyx_PyMODINIT_FUNC PyInit_g2p(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC PyInit_g2p(void)
+__Pyx_PyMODINIT_FUNC PyInit__phonetisaurus(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC PyInit__phonetisaurus(void)
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 {
   return PyModuleDef_Init(&__pyx_moduledef);
@@ -3951,7 +4001,7 @@ bad:
 }
 
 
-static CYTHON_SMALL_CODE int __pyx_pymod_exec_g2p(PyObject *__pyx_pyinit_module)
+static CYTHON_SMALL_CODE int __pyx_pymod_exec__phonetisaurus(PyObject *__pyx_pyinit_module)
 #endif
 #endif
 {
@@ -3968,7 +4018,7 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_g2p(PyObject *__pyx_pyinit_module)
   #if CYTHON_PEP489_MULTI_PHASE_INIT
   if (__pyx_m) {
     if (__pyx_m == __pyx_pyinit_module) return 0;
-    PyErr_SetString(PyExc_RuntimeError, "Module 'g2p' has already been imported. Re-initialisation is not supported.");
+    PyErr_SetString(PyExc_RuntimeError, "Module '_phonetisaurus' has already been imported. Re-initialisation is not supported.");
     return -1;
   }
   #elif PY_MAJOR_VERSION >= 3
@@ -3980,13 +4030,13 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_g2p(PyObject *__pyx_pyinit_module)
   Py_INCREF(__pyx_m);
   #else
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("g2p", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("_phonetisaurus", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   if (unlikely(!__pyx_m)) __PYX_ERR(1, 1, __pyx_L1_error)
   #elif CYTHON_USE_MODULE_STATE
   __pyx_t_1 = PyModule_Create(&__pyx_moduledef); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
   {
     int add_module_result = PyState_AddModule(__pyx_t_1, &__pyx_moduledef);
-    __pyx_t_1 = 0; /* transfer ownership from __pyx_t_1 to g2p pseudovariable */
+    __pyx_t_1 = 0; /* transfer ownership from __pyx_t_1 to _phonetisaurus pseudovariable */
     if (unlikely((add_module_result < 0))) __PYX_ERR(1, 1, __pyx_L1_error)
     pystate_addmodule_run = 1;
   }
@@ -4010,7 +4060,7 @@ if (!__Pyx_RefNanny) {
       Py_FatalError("failed to import 'refnanny' module");
 }
 #endif
-  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_g2p(void)", 0);
+  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit__phonetisaurus(void)", 0);
   if (__Pyx_check_binary_version(__PYX_LIMITED_VERSION_HEX, __Pyx_get_runtime_version(), CYTHON_COMPILING_IN_LIMITED_API) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #ifdef __Pxy_PyFrame_Initialize_Offsets
   __Pxy_PyFrame_Initialize_Offsets();
@@ -4048,14 +4098,14 @@ if (!__Pyx_RefNanny) {
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_g2p) {
+  if (__pyx_module_is_main__phonetisaurus) {
     if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(1, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "g2p")) {
-      if (unlikely((PyDict_SetItemString(modules, "g2p", __pyx_m) < 0))) __PYX_ERR(1, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "_phonetisaurus")) {
+      if (unlikely((PyDict_SetItemString(modules, "_phonetisaurus", __pyx_m) < 0))) __PYX_ERR(1, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -4076,25 +4126,25 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #endif
 
-  /* "g2p.pyx":16
+  /* "src/core.pyx":16
  *     self.phonemizer = new Phonemizer(modelfile.encode("utf-8"))
  * 
  *   def phoneticize(self, str value):             # <<<<<<<<<<<<<<
  *     cdef string c_value = value.encode("utf-8")
  *     return [c.decode("utf-8") for c in self.phonemizer.phoneticize(c_value)]
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_3g2p_5Model_3phoneticize, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Model_phoneticize, NULL, __pyx_n_s_g2p, __pyx_d, ((PyObject *)__pyx_codeobj__2)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 16, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_14_phonetisaurus_5Model_3phoneticize, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Model_phoneticize, NULL, __pyx_n_s_phonetisaurus, __pyx_d, ((PyObject *)__pyx_codeobj__2)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_3g2p_Model, __pyx_n_s_phoneticize, __pyx_t_2) < 0) __PYX_ERR(1, 16, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_14_phonetisaurus_Model, __pyx_n_s_phoneticize, __pyx_t_2) < 0) __PYX_ERR(1, 16, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  PyType_Modified(__pyx_ptype_3g2p_Model);
+  PyType_Modified(__pyx_ptype_14_phonetisaurus_Model);
 
   /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
  *     raise TypeError, "no default __reduce__ due to non-trivial __cinit__"
  * def __setstate_cython__(self, __pyx_state):
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_3g2p_5Model_5__reduce_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Model___reduce_cython, NULL, __pyx_n_s_g2p, __pyx_d, ((PyObject *)__pyx_codeobj__4)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_14_phonetisaurus_5Model_7__reduce_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Model___reduce_cython, NULL, __pyx_n_s_phonetisaurus, __pyx_d, ((PyObject *)__pyx_codeobj__4)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_reduce_cython, __pyx_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -4105,12 +4155,12 @@ if (!__Pyx_RefNanny) {
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
  *     raise TypeError, "no default __reduce__ due to non-trivial __cinit__"
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_3g2p_5Model_7__setstate_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Model___setstate_cython, NULL, __pyx_n_s_g2p, __pyx_d, ((PyObject *)__pyx_codeobj__6)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 3, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_14_phonetisaurus_5Model_9__setstate_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Model___setstate_cython, NULL, __pyx_n_s_phonetisaurus, __pyx_d, ((PyObject *)__pyx_codeobj__6)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_setstate_cython, __pyx_t_2) < 0) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "g2p.pyx":1
+  /* "src/core.pyx":1
  * #cython: language_level=3             # <<<<<<<<<<<<<<
  * from libcpp.vector cimport vector
  * from libcpp.string cimport string
@@ -4127,7 +4177,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_2);
   if (__pyx_m) {
     if (__pyx_d && stringtab_initialized) {
-      __Pyx_AddTraceback("init g2p", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init _phonetisaurus", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     #if !CYTHON_USE_MODULE_STATE
     Py_CLEAR(__pyx_m);
@@ -4141,7 +4191,7 @@ if (!__Pyx_RefNanny) {
     }
     #endif
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init g2p");
+    PyErr_SetString(PyExc_ImportError, "init _phonetisaurus");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
