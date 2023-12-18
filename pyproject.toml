@@ -4,6 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sosap"
+version = "0.0.1"
 authors = [{ name = "Seanghay Yath", email = "seanghay.dev@gmail.com" }]
 
 description = "Python binding for Phonetisaurus"
@@ -18,8 +19,6 @@ classifiers = [
     "Programming Language :: Cython",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
-
-dynamic = ["version"]
 
 [project.urls]
 repository = "https://github.com/seanghay/sosap"
