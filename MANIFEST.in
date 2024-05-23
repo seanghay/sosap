@@ -1,0 +1,7 @@
+include README.md LICENSE
+graft src/openfst
+graft src/Phonetisaurus
+graft src/sosap
+graft src/core.cpp
+graft src/core.pyx
+graft src/phonemizer.cc

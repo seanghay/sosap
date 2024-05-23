@@ -6,7 +6,7 @@ COMPILE_ARGS = ["-std=c++11", "-w"]
 if sys.platform.startswith("darwin"):
     COMPILE_ARGS.append("-stdlib=libc++")
     COMPILE_ARGS.append("-mmacosx-version-min=10.7")
-    
+
 phonetisaurus_extension = Extension(
     name="_phonetisaurus",
     sources=[
