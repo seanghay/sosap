@@ -1,4 +1,5 @@
 from setuptools import setup, Extension, find_packages
+from Cython.Build import cythonize
 import sys
 
 COMPILE_ARGS = ["-std=c++11", "-w"]
@@ -21,8 +22,6 @@ phonetisaurus_extension = Extension(
         "src/openfst/lib/util.cc",
         "src/openfst/lib/weight.cc",
         "src/Phonetisaurus/lib/util.cc",
-        "src/phonemizer.cc",
-        "src/core.cpp",
         "src/core.pyx",
     ],
     language="c++",
@@ -34,4 +33,4 @@ phonetisaurus_extension = Extension(
     extra_compile_args=COMPILE_ARGS,
 )
 
-setup(ext_modules=[phonetisaurus_extension], packages=find_packages("src"))
+setup(ext_modules=cythonize(phonetisaurus_extension, nthreads=4))
