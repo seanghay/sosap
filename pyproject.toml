@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sosap"
-version = "0.2.1"
+version = "0.2.2"
 authors = [{ name = "Seanghay Yath", email = "seanghay.dev@gmail.com" }]
 
 description = "Python binding for Phonetisaurus"
@@ -34,4 +34,4 @@ where = ["src"]
 before-build = "rm -rf {project}/build"
 
 [tool.cibuildwheel.linux]
-archs = ["auto64"]
+archs = ["auto64", "aarch64"]

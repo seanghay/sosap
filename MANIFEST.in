@@ -1,2 +1,2 @@
 include README.md LICENSE
-include src/core.pyx src/core.cpp src/phonemizer.cc
+recursive-include src *
