@@ -34,4 +34,4 @@ where = ["src"]
 before-build = "rm -rf {project}/build"
 
 [tool.cibuildwheel.linux]
-archs = ["auto64", "aarch64"]
+archs = ["auto64"]
