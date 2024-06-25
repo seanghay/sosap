@@ -12,13 +12,27 @@ pip install sosap
 pip install git+https://github.com/seanghay/sosap.git
 ```
 
-### Usage
+### Phoneticize
+
 
 ```python
 from sosap import Model
 
 model = Model("g2p.fst")
 model.phoneticize("hello")
+```
+
+### Enable Sampling
+
+```python
+from sosap import Model
+
+model = Model("model")
+results = model.phoneticize_sampling("hello", nbest=4)
+# => [['h', 'ɛɛ', 'l', 'oo'], ['h', 'ee', '.', 'l', 'oo'], ['h', 'ɛɛ', 'l', '.', 'l', 'ɔɔ'], ['h', 'ɛɛ', '.', 'l', 'oo']]
+
+results = model.phoneticize_sampling("hello", nbest=4, beam=1000, threshold=99.0, pmass=99.0)
+# => [['h', 'ɛɛ', 'l', 'oo'], ['h', 'ee', '.', 'l', 'oo'], ['h', 'ɛɛ', 'l', '.', 'l', 'ɔɔ'], ['h', 'ɛɛ', '.', 'l', 'oo']]
 ```
 
 ---

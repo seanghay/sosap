@@ -22,7 +22,22 @@ public:
     return results;
   }
 
-  Phonemizer()
+  std::vector<std::vector<std::string>> phoneticize_sampling(std::string &value, int nbest, int beam, float threshold, double pmass)
+  {
+    std::vector<std::vector<std::string>> collections;
+    for (auto pathData : this->decoder->Phoneticize(value, nbest, beam, threshold, false, false, pmass))
+    {
+      std::vector<std::string> results;
+      for (auto symid : pathData.Uniques)
+      {
+        results.push_back(this->decoder->FindOsym(symid));
+      }
+      collections.push_back(results);
+    }
+    return collections;
+  }
+
+  ~Phonemizer()
   {
     if (this->decoder)
     {
