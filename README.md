@@ -27,7 +27,7 @@ model.phoneticize("hello")
 ```python
 from sosap import Model
 
-model = Model("model")
+model = Model("g2p.fst")
 results = model.phoneticize_sampling("hello", nbest=4)
 # => [['h', 'ɛɛ', 'l', 'oo'], ['h', 'ee', '.', 'l', 'oo'], ['h', 'ɛɛ', 'l', '.', 'l', 'ɔɔ'], ['h', 'ɛɛ', '.', 'l', 'oo']]
 
