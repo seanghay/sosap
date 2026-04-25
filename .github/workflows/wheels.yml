@@ -1,76 +1,172 @@
-name: Wheels
+name: wheels
 
 on:
-  release:
-    types:
-      - published
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  build_sdist:
-    name: Build SDist
+  linux:
+    runs-on: ${{ matrix.platform.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - runner: ubuntu-latest
+            target: x86_64
+          - runner: ubuntu-latest
+            target: aarch64
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build wheel
+        uses: PyO3/maturin-action@v1
+        with:
+          target: ${{ matrix.platform.target }}
+          args: --release --out dist
+          sccache: "true"
+          manylinux: auto
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-linux-${{ matrix.platform.target }}
+          path: dist
+
+  musllinux:
+    runs-on: ${{ matrix.platform.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - runner: ubuntu-latest
+            target: x86_64
+          - runner: ubuntu-latest
+            target: aarch64
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build wheel
+        uses: PyO3/maturin-action@v1
+        with:
+          target: ${{ matrix.platform.target }}
+          args: --release --out dist
+          sccache: "true"
+          manylinux: musllinux_1_2
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-musllinux-${{ matrix.platform.target }}
+          path: dist
+
+  macos:
+    runs-on: ${{ matrix.platform.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - runner: macos-13      # x86_64
+            target: x86_64
+          - runner: macos-14      # arm64
+            target: aarch64
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build wheel
+        uses: PyO3/maturin-action@v1
+        with:
+          target: ${{ matrix.platform.target }}
+          args: --release --out dist
+          sccache: "true"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-macos-${{ matrix.platform.target }}
+          path: dist
+
+  windows:
+    runs-on: ${{ matrix.platform.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - runner: windows-latest
+            target: x64
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          architecture: ${{ matrix.platform.target }}
+      - name: Build wheel
+        uses: PyO3/maturin-action@v1
+        with:
+          target: ${{ matrix.platform.target }}
+          args: --release --out dist
+          sccache: "true"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-windows-${{ matrix.platform.target }}
+          path: dist
+
+  sdist:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
+      - uses: actions/checkout@v4
+      - name: Build sdist
+        uses: PyO3/maturin-action@v1
+        with:
+          command: sdist
+          args: --out dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-sdist
+          path: dist
 
-    - name: Build SDist
-      run: pipx run build --sdist
-
-    - name: Check metadata
-      run: pipx run twine check dist/*
-
-    - uses: actions/upload-artifact@v4
-      with:
-        name: cibw-sdist
-        path: dist/*.tar.gz
-
-
-  build_wheels:
-    name: Wheels on ${{ matrix.os }}
+  smoke-test:
+    needs: [linux, macos, windows]
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-13]
-
+        os: [ubuntu-latest, macos-14, windows-latest]
+        python-version: ["3.8", "3.12"]
     steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: wheels-*
+          merge-multiple: true
+          path: dist
+      - name: Install + import smoke test
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --no-index --find-links dist sosap
+          python -c "from sosap import Model, PathData; print('import ok'); print(Model.__module__)"
 
-    - uses: pypa/cibuildwheel@v2.17
-      env:
-        CIBW_ARCHS_MACOS: auto universal2
-
-    - name: Verify clean directory
-      run: git diff --exit-code
-      shell: bash
-
-    - name: Upload wheels
-      uses: actions/upload-artifact@v4
-      with:
-        name: cibw-wheels-${{ matrix.os }}
-        path: wheelhouse/*.whl
-
-
-  upload_all:
-    name: Upload if release
-    needs: [build_wheels, build_sdist]
+  # Aggregate all artifacts into a single release-ready bundle.
+  collect:
+    needs: [linux, musllinux, macos, windows, sdist]
     runs-on: ubuntu-latest
-    if: github.event_name == 'release' && github.event.action == 'published'
-
     steps:
-    - uses: actions/setup-python@v5
-      with:
-        python-version: "3.x"
-
-    - uses: actions/download-artifact@v4
-      with:
-        pattern: cibw-*
-        path: dist
-        merge-multiple: true
-
-    - uses: pypa/gh-action-pypi-publish@release/v1
-      with:
-        password: ${{ secrets.pypi_password }}
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: wheels-*
+          merge-multiple: true
+          path: dist
+      - name: List wheels
+        run: ls -la dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: all-wheels
+          path: dist

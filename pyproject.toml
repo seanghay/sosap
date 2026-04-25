@@ -1,36 +1,29 @@
 [build-system]
-requires = ["setuptools>=67.4.0", "Cython>=0.29.33"]
-build-backend = "setuptools.build_meta"
+requires = ["maturin>=1.7,<2.0"]
+build-backend = "maturin"
 
 [project]
 name = "sosap"
-version = "0.3.0"
+version = "0.0.2"
 authors = [{ name = "Seanghay Yath", email = "seanghay.dev@gmail.com" }]
-
-description = "Python binding for Phonetisaurus"
+description = "Phonetisaurus G2P inference, pure-Rust implementation with Python bindings"
 readme = "README.md"
-requires-python = ">=3.7"
-
+requires-python = ">=3.8"
+license = { text = "MIT" }
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Cython",
+    "Programming Language :: Rust",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 
 [project.urls]
-repository = "https://github.com/seanghay/sosap"
+Repository = "https://github.com/seanghay/sosap"
 
-[tool.setuptools]
-include-package-data = true
-
-[tool.setuptools.packages.find]
-where = ["src"]
-
-[tool.cibuildwheel]
-# Setuptools bug causes collision between pypy and cpython artifacts
-before-build = "rm -rf {project}/build"
-
-[tool.cibuildwheel.linux]
-archs = ["auto64"]
+[tool.maturin]
+manifest-path = "rust/Cargo.toml"
+python-source = "python"
+module-name = "sosap._sosap"
+features = ["pyo3/extension-module", "python"]
+strip = true
