@@ -7,12 +7,12 @@
 //!
 //! Compared to `NShortestPathSpecialized` in
 //! `src/Phonetisaurus/include/PhonetisaurusRex.h:211-358` this is a
-//! semantically-equivalent simplification: we ask rustfst for `nbest`
-//! candidate paths, then dedupe them by `unique_olabels`. For `nbest=1`
-//! (the default) this is exact; for `nbest>1` it can return fewer unique
-//! paths than C++ would, since the C++ algorithm keeps searching past
-//! duplicates. Oversampling via `nbest * 4` covers the common case;
-//! callers needing exact n>1 parity should oversample further.
+//! semantically-equivalent simplification: many lattice paths can decompose
+//! to the same monophone sequence after M2MPathFilter cluster expansion +
+//! veto filtering, so we ask rustfst for more raw paths than `nbest`,
+//! dedupe by `unique_olabels`, and grow the request if we don't have
+//! enough unique decompositions yet — capped so pathological inputs
+//! don't loop forever.
 
 use anyhow::Result;
 
@@ -36,16 +36,35 @@ pub fn nbest_paths<F: PathFilter>(
         return Ok(acc);
     }
 
-    // Oversample to give the dedupe step room to find `nbest` unique paths.
-    let oversample = nbest.saturating_mul(4).max(nbest);
-    let cfg = ShortestPathConfig::default().with_nshortest(oversample);
-    let result: VectorFst<TropicalWeight> = shortest_path_with_config(lattice, cfg)?;
+    // Many lattice paths can decompose to the same monophone sequence after
+    // M2MPathFilter expansion. Ask rustfst for more raw paths than `nbest`,
+    // dedupe, and double the request if we still don't have enough unique
+    // decompositions. The cap prevents pathological inputs from looping
+    // forever.
+    let mut nshortest = nbest.saturating_mul(8).max(16);
+    let cap = nbest.saturating_mul(256).max(1024);
 
-    if result.start().is_none() {
-        return Ok(acc);
+    loop {
+        let cfg = ShortestPathConfig::default().with_nshortest(nshortest);
+        let result: VectorFst<TropicalWeight> =
+            shortest_path_with_config(lattice, cfg)?;
+
+        if result.start().is_none() {
+            return Ok(acc);
+        }
+
+        // Reset and re-walk: each iteration starts from a larger candidate
+        // tree. PathFilter has no per-call state to clear; PathAccumulator
+        // is rebuilt fresh.
+        acc = PathAccumulator::new();
+        walk_nbest_tree(&result, path_filter, nbest, accumulate, &mut acc)?;
+
+        if acc.ordered_paths.len() >= nbest || nshortest >= cap {
+            break;
+        }
+        nshortest = nshortest.saturating_mul(2).min(cap);
     }
 
-    walk_nbest_tree(&result, path_filter, nbest, accumulate, &mut acc)?;
     Ok(acc)
 }
 
@@ -57,52 +76,22 @@ fn walk_nbest_tree<F: PathFilter>(
     acc: &mut PathAccumulator,
 ) -> Result<()> {
     let start = result.start().unwrap();
-
-    // n=1: rustfst returns a single linear chain rooted at `start`; treat
-    // the start as the head of the only path.
     let start_trs = result.get_trs(start)?;
     let start_arcs: Vec<_> = start_trs.trs().iter().cloned().collect();
 
-    let single_chain = start_arcs.is_empty()
-        || (start_arcs.len() == 1 && {
-            // If the start has exactly one outgoing arc and the start itself
-            // has no other distinguishing structure (i.e. it's the chain head),
-            // walk from start as a single path.
-            // Heuristic: if rustfst's nshortest>1 produced one branch only,
-            // treat as a single chain too.
-            true
-        });
-
-    if single_chain && nbest == 1 {
-        let mut path = Path::default();
-        let mut state = start;
-        loop {
-            if let Some(_) = result.final_weight(state)? {
-                break;
-            }
-            let trs = result.get_trs(state)?;
-            let trs_slice = trs.trs();
-            if trs_slice.is_empty() {
-                break;
-            }
-            let arc = trs_slice[0].clone();
-            path_filter.extend(&mut path, &arc);
-            state = arc.nextstate;
-        }
-        acc.push(path, accumulate);
-        return Ok(());
-    }
-
-    // n>1: start has multiple outgoing arcs, one per branch.
+    // The shortest-path output from rustfst is a tree:
+    //   - nshortest=1: start has 1 outgoing arc, the head of the only path.
+    //   - nshortest>1: start has up to nshortest outgoing arcs, each the
+    //     head of a distinct branch leading to a final state.
+    // Either way each arc from start heads a complete path; we walk it,
+    // applying the filter per arc, and accumulate.
     for branch_arc in start_arcs {
         let mut path = Path::default();
-        // The branch_arc itself is part of the path bookkeeping in C++ —
-        // matching that, run extend on it.
         path_filter.extend(&mut path, &branch_arc);
 
         let mut state = branch_arc.nextstate;
         loop {
-            if let Some(_) = result.final_weight(state)? {
+            if result.final_weight(state)?.is_some() {
                 break;
             }
             let trs = result.get_trs(state)?;
@@ -121,4 +110,3 @@ fn walk_nbest_tree<F: PathFilter>(
     }
     Ok(())
 }
-
