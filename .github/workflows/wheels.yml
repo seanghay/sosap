@@ -6,6 +6,8 @@ on:
     tags: ["v*"]
   pull_request:
   workflow_dispatch:
+  release:
+    types: [published]
 
 permissions:
   contents: read
@@ -167,3 +169,23 @@ jobs:
         with:
           name: all-wheels
           path: dist
+
+  # Publish wheels + sdist to PyPI when a GitHub Release is published.
+  # Requires a `PYPI_PASSWORD` secret holding a PyPI API token.
+  publish:
+    needs: [linux, macos, windows, sdist, smoke-test]
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: wheels-*
+          merge-multiple: true
+          path: dist
+      - name: Upload to PyPI
+        uses: PyO3/maturin-action@v1
+        env:
+          MATURIN_PYPI_TOKEN: ${{ secrets.PYPI_PASSWORD }}
+        with:
+          command: upload
+          args: --non-interactive --skip-existing dist/*

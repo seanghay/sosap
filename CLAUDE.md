@@ -95,7 +95,9 @@ m.find_osym("h"); m.find_osym(5)
 
 Linux jobs batch all interpreters in a single matrix entry per (target, libc) using `--interpreter python3.11 python3.12 python3.13 python3.14` since the manylinux/musllinux containers ship every CPython. macOS and Windows parallelize across (target, python-version) since each runner has only one Python at a time.
 
-Triggers: push to `main`, tags `v*`, PRs, manual. Wheels are uploaded as `wheels-<platform>-<libc-or-arch>[-py<version>]` artifacts plus an `all-wheels` aggregate. A `smoke-test` job downloads the artifacts and verifies `from sosap import Model` works on every supported (OS, Python) combination — catches ABI mismatches before release. No PyPI publish step yet — add one when ready.
+Triggers: push to `main`, tags `v*`, PRs, manual, **GitHub release published**. Wheels are uploaded as `wheels-<platform>-<libc-or-arch>[-py<version>]` artifacts plus an `all-wheels` aggregate. A `smoke-test` job downloads the artifacts and verifies `from sosap import Model` works on every supported (OS, Python) combination — catches ABI mismatches before release.
+
+When a GitHub Release is published, the `publish` job uploads all wheels + sdist to PyPI via `maturin upload`. It needs a repo secret named `PYPI_PASSWORD` containing a PyPI API token. The job depends on smoke-test, so a failing wheel never reaches PyPI. To add deploy protection (required reviewers, environment-scoped secret), wrap the job in a GitHub Environment by adding `environment: pypi` (or similar) and configuring rules in repo settings.
 
 Minimum supported Python version is **3.11** (set in `pyproject.toml`). To raise or lower it, update `requires-python` *and* the matrix in three places: `PY_VERSIONS` env var, the linux `--interpreter` lists, and the `python-version` matrix entries on macos/windows/smoke-test.
 
