@@ -108,6 +108,52 @@ impl PyModel {
             .collect()
     }
 
+    /// Convenience over `phoneticize_paths`: returns each path's phoneme
+    /// strings (already cluster-decomposed and veto-filtered) instead of
+    /// raw `PathData`. Backward-compatible with the previous Cython binding.
+    #[pyo3(signature = (
+        word,
+        nbest = 1,
+        beam = 10_000,
+        threshold = 99.0,
+        pmass = 99.0,
+    ))]
+    fn phoneticize_sampling(
+        &self,
+        word: &str,
+        nbest: usize,
+        beam: usize,
+        threshold: f32,
+        pmass: f64,
+    ) -> Vec<Vec<String>> {
+        let opts = PhoneticizeOptions {
+            nbest,
+            beam,
+            threshold,
+            pmass,
+            ..Default::default()
+        };
+        self.inner
+            .phoneticize(word, &opts)
+            .into_iter()
+            .map(|p| {
+                p.uniques
+                    .iter()
+                    .filter_map(|&id| {
+                        if id < 0 {
+                            None
+                        } else {
+                            self.inner
+                                .osyms()
+                                .get_symbol(id as u32)
+                                .map(str::to_string)
+                        }
+                    })
+                    .collect()
+            })
+            .collect()
+    }
+
     /// Look up an input symbol by name or ID. Mirrors `FindIsym` overloads.
     fn find_isym(&self, key: &Bound<'_, PyAny>) -> PyResult<Py<PyAny>> {
         find_sym(key, true, &self.inner)
