@@ -91,7 +91,7 @@ m.find_osym("h"); m.find_osym(5)
 
 - **CPython**: 3.8, 3.9, 3.10, 3.11, 3.12, 3.13, 3.14
 - **PyPy**: 3.10, 3.11
-- **Platforms**: linux x86_64+aarch64 (manylinux + musllinux), macos x86_64+aarch64, windows x64
+- **Platforms**: linux x86_64+aarch64 (manylinux + musllinux), macos aarch64, windows x64
 - Plus an sdist
 
 Linux jobs batch all interpreters in a single matrix entry per (target, libc) using `--interpreter python3.8 ... pypy3.10` since the manylinux/musllinux containers ship every CPython. macOS and Windows parallelize across (target, python-version) since each runner has only one Python at a time.
