@@ -4,7 +4,7 @@ build-backend = "maturin"
 
 [project]
 name = "sosap"
-version = "0.0.2"
+version = "0.4.0"
 authors = [{ name = "Seanghay Yath", email = "seanghay.dev@gmail.com" }]
 description = "Phonetisaurus G2P inference, pure-Rust implementation with Python bindings"
 readme = "README.md"
