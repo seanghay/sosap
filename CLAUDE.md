@@ -89,13 +89,15 @@ m.find_osym("h"); m.find_osym(5)
 
 `.github/workflows/wheels.yml` builds version-specific wheels (no abi3) for the full Python matrix:
 
-- **CPython**: 3.8, 3.9, 3.10, 3.11, 3.12, 3.13, 3.14
-- **PyPy**: 3.10, 3.11
+- **CPython**: 3.11, 3.12, 3.13, 3.14
+- **PyPy**: 3.11
 - **Platforms**: linux x86_64+aarch64 (manylinux + musllinux), macos aarch64, windows x64
 - Plus an sdist
 
-Linux jobs batch all interpreters in a single matrix entry per (target, libc) using `--interpreter python3.8 ... pypy3.10` since the manylinux/musllinux containers ship every CPython. macOS and Windows parallelize across (target, python-version) since each runner has only one Python at a time.
+Linux jobs batch all interpreters in a single matrix entry per (target, libc) using `--interpreter python3.11 ... pypy3.11` since the manylinux/musllinux containers ship every CPython. macOS and Windows parallelize across (target, python-version) since each runner has only one Python at a time.
 
 Triggers: push to `main`, tags `v*`, PRs, manual. Wheels are uploaded as `wheels-<platform>-<libc-or-arch>[-py<version>]` artifacts plus an `all-wheels` aggregate. A `smoke-test` job downloads the artifacts and verifies `from sosap import Model` works on every supported (OS, Python) combination — catches ABI mismatches before release. No PyPI publish step yet — add one when ready.
+
+Minimum supported Python version is **3.11** (set in `pyproject.toml`). To raise or lower it, update `requires-python` *and* the matrix in three places: `PY_VERSIONS` env var, the linux `--interpreter` lists, and the `python-version` matrix entries on macos/windows/smoke-test.
 
 If you want to add/remove a Python version, update the `PY_VERSIONS` env var at the top of the workflow *and* the `--interpreter` lists / matrix entries (no automatic propagation — they're explicit so the fail-fast behavior of YAML matrices is predictable).
