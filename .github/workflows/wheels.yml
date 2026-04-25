@@ -54,13 +54,6 @@ jobs:
             --interpreter
             python3.11 python3.12 python3.13 python3.14
           sccache: "true"
-      - name: Build PyPy wheel
-        uses: PyO3/maturin-action@v1
-        with:
-          target: ${{ matrix.platform.target }}
-          manylinux: ${{ matrix.platform.manylinux }}
-          args: --release --out dist --strip --interpreter pypy3.11
-          sccache: "true"
       - uses: actions/upload-artifact@v4
         with:
           name: wheels-${{ matrix.platform.libc }}-${{ matrix.platform.target }}
@@ -77,7 +70,7 @@ jobs:
         platform:
           - runner: macos-14
             target: aarch64
-        python-version: ["3.11", "3.12", "3.13", "3.14", "pypy3.11"]
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -100,7 +93,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.11", "3.12", "3.13", "3.14", "pypy3.11"]
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
